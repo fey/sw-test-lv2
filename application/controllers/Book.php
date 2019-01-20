@@ -7,20 +7,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Book extends CI_Controller
 {
-
     /**
      * Загрузка списка книг
      */
-    public function loadList()
+    public function index()
     {
         $this->load->model('Book_model');
-        $bookList = $this->Book_model->loadList();
-        // echo "dsfsdfsdf";
-        echo json_encode($bookList);
+        echo json_encode($this->Book_model->loadList());
     }
     public function show($id)
     {
         $this->load->model('Book_model');
-        $bookList = $this->Book_model->loadList();
+        // $this->Book_model->
+        var_dump($id);
+    }
+    public function new()
+    {
+        $this->load->model('Book_model');
+        $formData = [
+            'author_name' => $this->input->post('author_name'),
+            'book_name'   => $this->input->post('book_name'),
+            'book_year'   => $this->input->post('book_year')
+        ];
+        $this->Book_model->save($formData);
     }
 }

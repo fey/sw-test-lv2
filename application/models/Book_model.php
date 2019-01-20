@@ -7,6 +7,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Book_model extends CI_Model
 {
+    private $table = 'books';
+
     public function __construct()
     {
         $this->load->database();
@@ -18,12 +20,11 @@ class Book_model extends CI_Model
     public function loadList()
     {
         // todo реализовать получение списка книг из БД
-        $query = $this->db->get('books');
+        $query = $this->db->get($this->table);
         return $query->result_array();
-        // return array(
-        //     array('book_id' => 1, 'book_name' => 'Евгений Онегин', 'author_name' => 'Пушкин А.С.', 'book_year' => 1833),
-        //     array('book_id' => 2, 'book_name' => 'Война и мир', 'author_name' => 'Толстой Л.Н.', 'book_year' => 1869),
-        //     array('book_id' => 3, 'book_name' => 'Анна Каренина', 'author_name' => 'Толстой Л.Н.', 'book_year' => 1877)
-        // );
+    }
+    public function save($data)
+    {
+        $this->db->insert($this->table, $data);
     }
 }

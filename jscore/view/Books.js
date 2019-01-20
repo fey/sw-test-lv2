@@ -6,10 +6,10 @@ Ext.define('Swan.view.Books', {
 	store: {
 		proxy: {
 			type: 'ajax',
-			url: 'index.php/Book/loadList',
+			url: 'books',
 			reader: {
 				type: 'json',
-				idProperty: 'id'
+				idProperty: 'book_id'
 			}
 		},
 		autoLoad: true,
@@ -32,21 +32,22 @@ Ext.define('Swan.view.Books', {
 					Ext.create('Ext.form.Panel', {
 						renderTo: document.body,
 						bodyPadding: 10,
-						url: 'book/create',
+						url: 'books/new',
 						defaultType: 'textfield',
+						layout: 'anchor',
 						items: [
 							{
 								fieldLabel: 'Автор',
-								name: 'author'
+								name: 'author_name'
 							},
 							{
 								fieldLabel: 'Название книги',
-								name: 'name'
+								name: 'book_name'
 							},
 							{
 								xtype: 'datefield',
 								fieldLabel: 'Год издания',
-								name: 'year'
+								name: 'book_year'
 							}
 						],
 						buttons: [
@@ -59,7 +60,7 @@ Ext.define('Swan.view.Books', {
 										form.submit({
 											success: function(form, action) {
 												
-											   Ext.Msg.alert('Success', action.result.msg);
+											   Ext.Msg.alert('Success', action.result);
 											},
 											failure: function(form, action) {
 												console.log(form, action);
@@ -97,15 +98,15 @@ Ext.define('Swan.view.Books', {
 		}
 	}],
 	columns: [{
-		dataIndex: 'author',
+		dataIndex: 'author_name',
 		text: 'Автор',
 		width: 150
 	}, {
-		dataIndex: 'name',
+		dataIndex: 'book_name',
 		text: 'Название книги',
 		flex: 1
 	}, {
-		dataIndex: 'year',
+		dataIndex: 'book_year',
 		text: 'Год издания',
 		width: 150
 	}]
