@@ -12,31 +12,44 @@ class Book extends CI_Controller
      */
     public function index()
     {
-        $this->load->model('Book_model');
         echo json_encode($this->Book_model->loadList());
     }
     public function show($id)
     {
-        $this->load->model('Book_model');
-        // $this->Book_model->
         var_dump($id);
     }
     public function new()
     {
-        $this->load->model('Book_model');
         $formData = [
             'author_name' => $this->input->post('author_name'),
             'book_name'   => $this->input->post('book_name'),
             'book_year'   => $this->input->post('book_year')
         ];
-        $this->Book_model->save($formData);
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules([
+            [
+                'field' => 'author_name',
+                'rules' => 'required',
+            ],
+            [
+                'field' => 'book_name',
+                'rules' => 'required',
+            ],
+            [
+                'field' => 'book_year',
+                'rules' => 'required',
+            ],
+        ]);
+        if ($this->form_validation->run() == false) {
+            error_log('fail save', 4);
+        } else {
+            $this->Book_model->save($formData);
+        }
     }
-}
 
     public function exportXml()
     {
         $dom = new DOMDocument;
-        $this->load->model('Book_model');
         $booksNode = $dom->createElement('books');
         foreach ($this->Book_model->loadList() as $book) {
             $bookNode = $dom->createElement('book');
