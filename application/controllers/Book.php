@@ -12,7 +12,10 @@ class Book extends CI_Controller
      */
     public function index()
     {
-        echo json_encode($this->Book_model->loadList());
+        $books = $this->Book_model->loadList();
+        $this->output
+        ->set_content_type('application/json', 'utf-8')
+        ->set_output(json_encode($books));
     }
     public function show($id)
     {
@@ -42,6 +45,9 @@ class Book extends CI_Controller
         ]);
         if ($this->form_validation->run() == false) {
             error_log('fail save', 4);
+            // $this->output->set_output();
+            $this->output
+            ->set_status_header(305);
         } else {
             $this->Book_model->save($formData);
         }
@@ -60,7 +66,7 @@ class Book extends CI_Controller
         }
         $dom->appendChild($booksNode);
         header("Content-disposition: attachment; filename=books.xml");
-        header('Content-Type: text/xml');
-        echo $dom->saveXML();
+        header('Content-Type: text/xml, ');
+        $this->output->set_output($dom->saveXML());
     }
 }
