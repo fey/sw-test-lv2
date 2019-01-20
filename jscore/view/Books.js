@@ -23,7 +23,6 @@ Ext.define('Swan.view.Books', {
 	tbar: [{
 		text: 'Добавить',
 		handler: function() {
-			// todo надо реализовать добавление
 			Ext.create('Swan.forms.New').show();
 	}
 	}, {
@@ -42,7 +41,6 @@ Ext.define('Swan.view.Books', {
 	}, {
 		text: 'Экспорт в XML',
 		handler: function() {
-			// todo надо реализовать удаление
 			window.location = "/books/export";
 		}
 	}],

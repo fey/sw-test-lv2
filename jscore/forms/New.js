@@ -1,50 +1,53 @@
 Ext.define('Swan.forms.New', {
     extend: 'Ext.window.Window',
     title: 'Добавить книгу',
-    // height: 650,
-    // width: 400,
+    closeAction: 'method-hide',
+    width: 400,
     items: [
         Ext.create('Ext.form.Panel', {
             renderTo: document.body,
             bodyPadding: 10,
             url: 'books/new',
             defaultType: 'textfield',
-            layout: 'anchor',
             items: [
                 {
                     fieldLabel: 'Автор',
-                    name: 'author_name'
+                    name: 'author_name',
+                    width: '100%',
                 },
                 {
                     fieldLabel: 'Название книги',
-                    name: 'book_name'
+                    name: 'book_name',
+                    width: '100%'
                 },
                 {
-                    xtype: 'datefield',
+                    xtype: 'numberfield',
                     fieldLabel: 'Год издания',
-                    name: 'book_year'
+                    name: 'book_year',
+                    width: '100%',
+                    minValue: 1,
+                    maxValue: 2500,
+                    msgTarget: 'under',
                 }
             ],
             buttons: [
                 {
                     text: 'Submit',
                     handler: function() {
-                        const form = this.up('form'); // get the form panel
-                        
-                        if (form.isValid()) { // make sure the form contains valid data before submitting
+                        console.log(main);
+                        const form = this.up('form');
+                        const window = form.up('window');
                             form.submit({
-                                success: function(form, action) {
-                                    
-                                   Ext.Msg.alert('Success', action.result);
+                                success: function(action) {
+                                    Ext.Msg.alert('Success');
+                                window.close();
+
                                 },
-                                failure: function(form, action) {
-                                    console.log(form, action);
-                                    Ext.Msg.alert('Failed', action.result.msg);
+                                failure: function(action) {
+                                    Ext.Msg.alert('Failed');
                                 }
                             });
-                        } else { // display error alert if the data is invalid
-                            Ext.Msg.alert('Invalid Data', 'Please correct form errors.')
-                        }
+                            
                     }
                 }
             ]
