@@ -21,6 +21,10 @@ class Main extends CI_Controller
      */
     public function index()
     {
-        $this->load->view('main_view');
+        $this->load->model('Book_model');
+        $bookList = $this->Book_model->loadList();
+        // echo "dsfsdfsdf";
+        echo json_encode($bookList);
+        // $this->load->view('main_view');
     }
 }

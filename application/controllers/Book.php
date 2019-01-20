@@ -15,6 +15,12 @@ class Book extends CI_Controller
     {
         $this->load->model('Book_model');
         $bookList = $this->Book_model->loadList();
+        // echo "dsfsdfsdf";
         echo json_encode($bookList);
+    }
+    public function show($id)
+    {
+        $this->load->model('Book_model');
+        $bookList = $this->Book_model->loadList();
     }
 }
