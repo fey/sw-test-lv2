@@ -43,7 +43,7 @@ Ext.define('Swan.view.Books', {
 		text: 'Экспорт в XML',
 		handler: function() {
 			// todo надо реализовать удаление
-			window.location = "/book/exportXml";
+			window.location = "/books/export";
 		}
 	}],
 	columns: [{

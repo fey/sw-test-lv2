@@ -54,7 +54,8 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = false;
 $route = [
     'default_controller' => 'main',
-    'books' => 'Book/index',
-    'books/new' => 'Book/new',
-    'books/(:num)' => 'Book/show/$1'
+    'books'              => 'Book/index',
+    'books/new'          => 'Book/new',
+    'books/(:num)'       => 'Book/show/$1',
+    'books/export'       => 'Book/exportXml'
 ];
